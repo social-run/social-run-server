@@ -55,6 +55,14 @@ app.get('/api/v1/runs/:id/votes', (req, res)=> {
     .catch(console.error);
 })
 
+app.get('/admin',(req,res)=>{
+  console.log(req);
+  client.query('SELECT username FROM users WHERE username=$1',[req.headers.token])
+    .then(results=>{
+      if(results.rows[0].username===req.headers.token){res.send(results.rows[0].username)};
+    })
+})
+
 app.put('/', (req, res) => {
   console.log(req.params.id);
   client.query('SELECT votes FROM runs WHERE run_id=$1',

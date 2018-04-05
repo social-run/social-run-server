@@ -1,0 +1,26 @@
+{
+  "name": "pit-stop",
+  "version": "1.0.0",
+  "description": "301-Final-Project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hoganl/pit-stop.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hoganl/pit-stop/issues"
+  },
+  "homepage": "https://github.com/hoganl/pit-stop#readme",
+  "dependencies": {
+    "body-parser": "*",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "pg": "^7.4.1",
+    "superagent": "^3.8.2"
+  }
+}

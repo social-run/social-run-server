@@ -50,13 +50,13 @@ app.get('/api/v1/runs/:id/votes', (req, res)=> {
       res.send(`${results.rows[0].votes+1}`);
       console.log(results.rows[0].votes);
       client.query('UPDATE runs SET votes=$2 WHERE run_id=$1',
-        [req.params.id,parseInt(results[0])+1])
+        [req.params.id,parseInt(results.rows[0].votes+1)])
     })
     .catch(console.error);
 })
 
 app.get('/admin',(req,res)=>{
-  console.log(req);
+  console.log(req.headers.token);
   client.query('SELECT username FROM users WHERE username=$1',[req.headers.token])
     .then(results=>{
       if(results.rows[0].username===req.headers.token){res.send(results.rows[0].username)};
@@ -75,5 +75,3 @@ app.put('/', (req, res) => {
 app.get('/', (req, res) => res.redirect(CLIENT_URL));
 app.get('*', (req, res) => res.send('error'));
 app.listen(PORT, () => console.log(`Server listening on ${PORT}`));
-
-

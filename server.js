@@ -54,10 +54,14 @@ app.get('/api/v1/runs/:id/votes', (req, res)=> {
 })
 
 app.get('/admin',(req,res)=>{
-  client.query('SELECT username FROM users WHERE username=$1',[req.headers.token])
+  client.query('SELECT name FROM users WHERE name=$1',[req.headers.token])
     .then(results=>{
-      if(results.rows[0].username===req.headers.token){res.send(results.rows[0].username)};
+      console.log(results.rows[0].name,req.headers.token);
+      if(results.rows[0].name===req.headers.token)
+      {res.send(results.rows[0].name)}
+      else{res.send('incorrect username')}
     })
+    .catch(console.error)
 })
 
 app.put('/', (req, res) => {

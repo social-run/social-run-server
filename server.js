@@ -33,14 +33,12 @@ app.get('/api/v1/runs/:id', (req, res) => {
   client.query('SELECT * FROM runs WHERE run_id=$1;',
     [req.params.id])
     .then(results => {
-      console.log(results.rows);
       res.send(results.rows)
     })
     .catch(console.error);
 });
 
 app.get('/api/v1/runs/:id/votes', (req, res)=> {
-  console.log(req.params.id);
   client.query('SELECT votes FROM runs WHERE run_id=$1',
   //results[0]+1
     [req.params.id])
@@ -56,7 +54,6 @@ app.get('/api/v1/runs/:id/votes', (req, res)=> {
 })
 
 app.get('/admin',(req,res)=>{
-  console.log(req.headers.token);
   client.query('SELECT username FROM users WHERE username=$1',[req.headers.token])
     .then(results=>{
       if(results.rows[0].username===req.headers.token){res.send(results.rows[0].username)};
@@ -64,7 +61,6 @@ app.get('/admin',(req,res)=>{
 })
 
 app.put('/', (req, res) => {
-  console.log(req.params.id);
   client.query('SELECT votes FROM runs WHERE run_id=$1',
     [req.params.id])
     .then(results => res.send(results.row))
